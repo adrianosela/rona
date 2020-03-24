@@ -16,7 +16,7 @@ DATASET_URLS = {
 }
 
 # activate plot theme
-qeds.themes.mpl_style();
+qeds.themes.mpl_style()
 
 # load CSV data to a dict of dataset name to pandas dataframe
 DATASETS = dict()
@@ -25,7 +25,7 @@ for dset in DATASET_URLS:
 
 # data comes in "wide" format, reshape to “long” format with 
 # one country-date combination per row and counts in a single column
-ids = ["Province/State","Country/Region", "Lat","Long"]
+ids = ["Province/State", "Country/Region", "Lat", "Long"]
 for dset in DATASETS:
     DATASETS[dset] = DATASETS[dset].melt(id_vars=ids, var_name="Date", value_name=dset)
 
@@ -38,7 +38,13 @@ covid["Date"] = pd.to_datetime(covid["Date"])
 # populate empty cells
 covid["Province/State"]=covid["Province/State"].fillna("")
 
-# plot canadian cases
-df = covid.groupby("Country/Region").get_group("Canada")
-ax = canadaDF.groupby("Date").sum().reset_index().plot(x="Date", y=["confirmed","deaths","recoveries"], title="Covid Cases in Canada")
+# dataframe for specific country
+country = covid.groupby("Country/Region").get_group("Canada") # FIXME: make variable
+
+# plot confirmed cases data for country per province/state
+fig, ax = plt.subplots(figsize=(10,6))
+for prov, df in country.reset_index().groupby("Province/State"):
+    df.plot(x="Date", y="confirmed", ax=ax, label=prov)
+ax.set_title("Cases by Province")
+
 plt.show()
