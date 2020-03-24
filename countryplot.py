@@ -1,20 +1,12 @@
 #!/usr/bin/env python
 
+import datasets
 import pandas as pd
-import numpy as np
-from datasets import *
 import matplotlib.pyplot as plt
-import qeds
-from sklearn import (
-    linear_model, metrics, neural_network, pipeline, model_selection, preprocessing
-)
 from functools import reduce
 
-# download latest dataset
-dsets = download()
-
-# activate plot theme
-qeds.themes.mpl_style()
+# download latest version of dataset
+dsets = datasets.load()
 
 # data comes in "wide" format, reshape to “long” format with 
 # one country-date combination per row and counts in a single column
@@ -35,7 +27,7 @@ country = covid.groupby("Country/Region").get_group("Canada") # FIXME: make vari
 # plot confirmed cases data for country per province/state
 fig, ax = plt.subplots(figsize=(10,6))
 for prov, df in country.reset_index().groupby("Province/State"):
-    df.plot(x="Date", y="confirmed", ax=ax, label=prov)
+    df.plot(x="Date", y=datasets.CONFIRMED, ax=ax, label=prov)
 ax.set_title("Cases by Province")
 
 plt.show()
