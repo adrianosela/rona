@@ -1,3 +1,14 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import qeds
+from sklearn import (
+    linear_model, metrics, neural_network, pipeline, model_selection, preprocessing
+)
+
+# activate plot theme
+qeds.themes.mpl_style();
+
 #!/usr/bin/env python
 
 import requests
@@ -12,8 +23,10 @@ DATASET_URLS = {
     "deaths": DEATHS_URL
 }
 
+DATASETS = dict()
+
 for dset in DATASET_URLS:
-    resp = requests.get(DATASET_URLS[dset])
-    with open("%s.csv" % dset, 'w') as f:
-        f.write(resp.text)
-    f.close()
+    DATASETS[dset] = pd.read_csv(DATASET_URLS[dset])
+
+for dset in DATASET_URLS:
+    print(DATASETS[dset].head())
