@@ -38,4 +38,7 @@ covid["Date"] = pd.to_datetime(covid["Date"])
 # populate empty cells
 covid["Province/State"]=covid["Province/State"].fillna("")
 
-print(covid.groupby("Country/Region").get_group("Canada").groupby("Province/State").tail(1))
+# plot canadian cases
+df = covid.groupby("Country/Region").get_group("Canada")
+ax = canadaDF.groupby("Date").sum().reset_index().plot(x="Date", y=["confirmed","deaths","recoveries"], title="Covid Cases in Canada")
+plt.show()
