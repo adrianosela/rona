@@ -5,6 +5,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from functools import reduce
 
+import qeds
+
+# activate plot theme
+qeds.themes.mpl_style()
+
 # download latest version of dataset
 dsets = datasets.load()
 
