@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import pandas as pd
+import requests
 
 CONFIRMED = 'confirmed'
 RECOVERIES = 'recoveries'
@@ -17,3 +18,10 @@ def load():
     for dset in DATASET_URLS:
         dsets[dset] = pd.read_csv(DATASET_URLS[dset])
     return dsets
+
+def download():
+    for dset in DATASET_URLS:
+        resp = requests.get(DATASET_URLS[dset])
+        with open("%s.csv" % dset, 'w') as f:
+            f.write(resp.text)
+        f.close()
