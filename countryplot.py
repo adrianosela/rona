@@ -30,7 +30,12 @@ for dset in DATASETS:
     DATASETS[dset] = DATASETS[dset].melt(id_vars=ids, var_name="Date", value_name=dset)
 
 # merge all the dataframes on date
-covid = reduce(lambda x, y: pd.merge(x, y, on="Date"), list(DATASETS.values()))
+covid = reduce(lambda x, y: pd.merge(x, y, on=ids.append("Date")), list(DATASETS.values()))
+
+# format date
 covid["Date"] = pd.to_datetime(covid["Date"])
+
+# populate empty cells
 covid["Province/State"]=covid["Province/State"].fillna("")
+
 print(covid.groupby("Country/Region").get_group("Canada").groupby("Province/State").tail(1))
