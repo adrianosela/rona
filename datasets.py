@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import pandas as pd
+import sys
 from functools import reduce
 
 CONFIRMED = 'confirmed'
@@ -47,4 +48,7 @@ def combine(dsets):
     return combined
 
 if __name__ == "__main__":
-    combine(load()).to_csv("covid.csv", index=False)
+    path = "."
+    if len(sys.argv) > 1:
+        path = sys.argv[1]
+    combine(load()).to_csv(f'{path}/covid.csv', index=False)
