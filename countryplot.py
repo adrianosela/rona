@@ -22,7 +22,7 @@ def plot_country(country):
 
     # plot confirmed cases data for country per province/state
     fig, ax = plt.subplots(figsize=(10,6))
-    for prov, df in by_country.reset_index().groupby("Province/State"):
+    for prov, df in by_country.reset_index().groupby(datasets.PROVINCE_ID):
         df.plot(x="Date", y=datasets.CONFIRMED, ax=ax, label=prov)
     ax.set_title("Cases by Province")
     plt.show()
