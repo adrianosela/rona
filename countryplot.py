@@ -32,11 +32,9 @@ for dset in DATASETS:
 # merge all the dataframes on date
 covid = reduce(lambda x, y: pd.merge(x, y, on=ids.append("Date")), list(DATASETS.values()))
 
-# format date
+# format date and populate empty cells
 covid["Date"] = pd.to_datetime(covid["Date"])
-
-# populate empty cells
-covid["Province/State"]=covid["Province/State"].fillna("")
+covid["Province/State"] = covid["Province/State"].fillna("")
 
 # dataframe for specific country
 country = covid.groupby("Country/Region").get_group("Canada") # FIXME: make variable
