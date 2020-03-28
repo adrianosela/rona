@@ -16,6 +16,7 @@ covid = datasets.combine(dsets)
 def plot_country(country):
     try:
         by_country = covid.groupby(datasets.COUNTRY_ID).get_group(country)
+        print(by_country)
     except:
         print(f'no data for country: "{country}"')
         sys.exit(1)
@@ -24,7 +25,7 @@ def plot_country(country):
     fig, ax = plt.subplots(figsize=(10,6))
     for prov, df in by_country.reset_index().groupby(datasets.PROVINCE_ID):
         df.plot(x="Date", y=datasets.CONFIRMED, ax=ax, label=prov)
-    ax.set_title("Cases by Province")
+    ax.set_title("Cases by Province/State")
     plt.show()
 
 if __name__ == "__main__":

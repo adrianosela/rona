@@ -9,20 +9,20 @@ RECOVERIES = 'recoveries'
 DEATHS = 'deaths'
 
 DATASET_URLS = {
-    CONFIRMED:'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv',
-    RECOVERIES: 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv',
-    DEATHS: 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv'
+    CONFIRMED:'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv',
+    RECOVERIES:'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv',
+    DEATHS:'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv',
 }
 
-PROVINCE_ID = 'Province/State'
 COUNTRY_ID = 'Country/Region'
+PROVINCE_ID = 'Province/State'
 LATITUDE_ID = 'Lat'
 LONGITUDE_ID = 'Long'
 DATE_ID = 'Date'
 
 COLUMN_IDS = [
-    PROVINCE_ID,
     COUNTRY_ID,
+    PROVINCE_ID,
     LATITUDE_ID,
     LONGITUDE_ID
 ]
