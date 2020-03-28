@@ -16,7 +16,6 @@ covid = datasets.combine(dsets)
 def plot_country(country):
     try:
         by_country = covid.groupby(datasets.COUNTRY_ID).get_group(country)
-        print(by_country)
     except:
         print(f'no data for country: "{country}"')
         sys.exit(1)
